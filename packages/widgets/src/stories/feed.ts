@@ -2,8 +2,10 @@ import faker from './faker'
 import {
   IBaseTextInputProps,
   IControlProps,
+  IHeaderProps,
   IHomeFormProps,
   IImage,
+  ILayoutProps,
   ILink,
   ILinkedLabel,
   IMainFormProps,
@@ -96,4 +98,25 @@ export const feedHomeForm = (): IHomeFormProps => ({
   title: `Macro Calculator`,
   subtitle: 'Calculate the nutritional content of your meals',
   form: feedMainForm(),
+})
+
+export const feedHeader = (): IHeaderProps => ({
+  navLinks: [
+    {
+      label: 'Home',
+      link: {
+        href: '/',
+      },
+    },
+    {
+      label: 'Calculation',
+      link: {
+        href: '/calculation',
+      },
+    },
+  ],
+})
+
+export const feedLayout = (): ILayoutProps => ({
+  header: feedHeader(),
 })

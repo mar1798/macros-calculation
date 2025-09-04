@@ -3,27 +3,32 @@ import { Api } from '@/lib/api'
 import { publicConfig } from '@/сonfig'
 import { GetStaticPropsResult, InferGetStaticPropsType } from 'next'
 import { HomeForm } from 'widgets/organisms'
-import { IHomeFormProps } from 'widgets/types'
+import { IHomeProps } from 'widgets/types'
+import MainTemplate from '@/templates/main'
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 
-const Home: React.FC<Props> = ({ homeFormProps }) => {
+const Home: React.FC<Props> = ({ layout, form }) => {
   return (
-    <div>
-      <HomeForm {...homeFormProps} />
-    </div>
+    <MainTemplate {...layout}>
+      <HomeForm {...form} />
+    </MainTemplate>
   )
 }
 
-export async function getStaticProps(): Promise<
-  GetStaticPropsResult<{ homeFormProps: IHomeFormProps }>
-> {
+export async function getStaticProps(): Promise<GetStaticPropsResult<IHomeProps>> {
   const client = new Api({ baseUrl: publicConfig('baseUrl') })
-  const [homeFormProps] = await Promise.all([client.getRequest('getHomeFormProps', null)])
+  const [homeFormProps, header] = await Promise.all([
+    client.getRequest('getHomeFormProps', null),
+    client.getRequest('getHeaderProps', null),
+  ])
 
   return {
     props: {
-      homeFormProps,
+      form: homeFormProps,
+      layout: {
+        header: header,
+      },
     },
   }
 }

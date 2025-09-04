@@ -3,3 +3,4 @@
  */
 
 export * from './main-form'
+export * from './navbar'

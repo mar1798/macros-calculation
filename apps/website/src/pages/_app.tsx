@@ -4,7 +4,6 @@ import { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import clsx from 'clsx'
-import * as styles from '../styles.css'
 import React from 'react'
 import Injection from '@/injection/Injection'
 import Head from 'next/head'
@@ -51,11 +50,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
           content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=0"
         />
       </Head>
-      <main
-        className={clsx(inter.className, eloqua.className, styles.main, {
-          [styles.hidden]: pageProps.page?.pageView.options.overflowX,
-        })}
-      >
+      <main className={clsx(inter.className, eloqua.className)}>
         <Component {...pageProps} />
       </main>
     </Injection>

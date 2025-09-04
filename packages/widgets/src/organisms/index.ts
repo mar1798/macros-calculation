@@ -3,3 +3,5 @@
  */
 
 export * from './home-form'
+export * from './layout'
+export * from './header'

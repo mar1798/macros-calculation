@@ -1,6 +1,6 @@
 import { IFormSubmitFeed } from 'widgets/types'
 import { ExtractFirstParameter, GetRequests, MapGetRequests } from '@/types/api-types'
-import { feedHomeForm } from 'widgets/feed'
+import { feedHeader, feedHomeForm } from 'widgets/feed'
 
 export interface RequestOpts {
   baseUrl: string
@@ -35,6 +35,7 @@ export class Api {
   ): ReturnType<GetRequests[K]> {
     const map: MapGetRequests = {
       getHomeFormProps: () => Promise.resolve(feedHomeForm()),
+      getHeaderProps: () => Promise.resolve(feedHeader()),
     }
     return map[key](payload)
   }

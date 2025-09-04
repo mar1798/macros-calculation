@@ -171,3 +171,16 @@ export interface IHomeFormProps {
   subtitle: string
   form: IMainFormProps
 }
+
+export interface IHeaderProps {
+  navLinks: ILinkedLabel[]
+}
+
+export interface ILayoutProps {
+  header: IHeaderProps
+}
+
+export interface IHomeProps {
+  form: IHomeFormProps
+  layout: ILayoutProps
+}
