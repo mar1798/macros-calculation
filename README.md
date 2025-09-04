@@ -1,135 +1,98 @@
-# Turborepo starter
+# Drewl frontend repository
 
-This Turborepo starter is maintained by the Turborepo core team.
+## Packages
 
-## Using this example
+- `widgets`: UI component library.
 
-Run the following command:
+## Apps 
 
-```sh
-npx create-turbo@latest
+- `website`: an application that uses nextjs, and the widgets package to render the website. 
+
+
+## Commands
+
+To check the project
+
+```bash
+npm run check
 ```
 
-## What's inside?
 
-This Turborepo includes the following packages/apps:
+### ENV Variables:
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+```bash
+...
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+## Package `widgets`
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+Currently, includes React components (organized by folder following the recommendations of [atomic design](https://bradfrost.com/blog/post/atomic-web-design/)).
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+Commonly used styles and themes are also located here.
 
-### Develop
+Hooks and contexts are also located here.
 
-To develop all apps and packages, run the following command:
+Creating a new component looks like this:
 
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+```bash
+npm run generate -w widgets
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+Widget development and testing takes place through [storybook](https://storybook.js.org/)
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+```bash
+npm run storybook -w widgets
 ```
 
-### Remote Caching
+## Widgets package:
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+A library of components grouped according to the [atomic design principle](https://bradfrost.com/blog/post/atomic-web-design/). Everything is quite standard except for styling, which uses the [vanilla-extract-css library](https://vanilla-extract.style/).
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+### Vanilla-extract-css:
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+In essence, vanilla-extract-css can be considered as "CSS modules with TypeScript." All css.ts files are compiled into CSS during the project build, so this should be taken into account. The library does not have a runtime. All shared styles, as well as utilities for writing styles, are located in the /src/styling folder.
 
+### Folder descriptions:
+
+`/src/contexts` - React contexts
+
+`/src/hooks` - Custom React hooks
+
+`/src/svg` - Icons
+
+`/src/types` - Definitions of shared types (those that are likely to be reused in external packages, preferably include only JSON-serializable types here)
+
+`/src/util` - Set of common utilities that couldn't be categorized into other specific directories
+
+`/src/testing` - Utilities for testing and Storybook
+
+`/tools` - Set of scripts for console utilities (currently used for generating component boilerplates, more on that later)
+
+Many of these folders contain automatically generated index.ts files (they are generated after generating atoms/molecules/organisms, and they can also be generated manually using npm run barrels). The generation settings are stored in [.barrels.json files](https://www.npmjs.com/package/barrelsby). This also applies to the front-website package.
+
+### Generating component boilerplates:
+
+To create a template for an `atom/molecule/organism`, run:
+
+```bash
+npm run generate -w widgets
 ```
-cd my-turborepo
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
+Then choose the desired component type and specify its name.
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
+This will create a folder with the component, including the component file, Storybook, boilerplate files for styles and tests.
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+After that, you can start the Storybook with `npm run storybook -w widgets` and begin developing the component.
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+## Website app:
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
+...
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
 
-## Useful Links
+## General:
 
-Learn more about the power of Turborepo:
+It is important to separate the API interaction logic from the visual component library. Also, specific things unrelated to the website's appearance (such as analytics) should be separated. This is why the code is divided into front-website and widgets.
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+Before pushing changes, run:
+
+`npm run check` - This checks types and lints the entire project.
