@@ -1,6 +1,7 @@
 import faker from './faker'
 import {
   IBaseTextInputProps,
+  IControlProps,
   IImage,
   ILink,
   ILinkedLabel,
@@ -11,6 +12,12 @@ export const repeatFeed = <T>(val: T, times: number): T[] => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return new Array(times).fill(val)
 }
+
+export const feedControl = (label = 'Label', helperText = 'Helper text'): IControlProps => ({
+  label: label,
+  helperText: helperText,
+  error: false,
+})
 
 export const feedImage = (w: number, h: number): IImage => ({
   src: faker.image.url({ width: w, height: h }),

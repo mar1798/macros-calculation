@@ -3,9 +3,7 @@
  */
 
 export * from './content-parse'
-export * from './getRandomElements'
 export * from './icon-subset'
-export * from './pagination'
 export * from './responsive'
 export * from './sizes'
 export * from './unstated'

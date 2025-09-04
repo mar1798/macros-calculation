@@ -151,3 +151,12 @@ export interface IMainFormProps {
   buttonLabel: string
   formName: string
 }
+
+export interface IControlProps {
+  label?: string
+  helperText?: string
+  error?: boolean
+  children?: ReactNode
+  required?: boolean
+  helperTextClassName?: string
+}

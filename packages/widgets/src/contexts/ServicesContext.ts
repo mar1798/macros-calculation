@@ -3,7 +3,6 @@ import {
   IImageComponentProps,
   ILink,
   IRouterService,
-  IServiceFetch,
   IServiceForms,
   IWrapperComponent,
 } from '../types'
@@ -17,7 +16,6 @@ export interface ServiceContainerContextProps {
   services: {
     forms: IServiceForms
     router: IRouterService
-    request: IServiceFetch
   }
   components: {
     Link: React.FC<IWrapperComponent & ILink & IBasicStyling>
