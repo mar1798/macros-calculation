@@ -62,8 +62,8 @@ interface IButtonReset {
 export type IButtonUnion = IButtonButton | IButtonSubmit | IButtonReset | ILink
 
 export interface IButtonComponentProps {
-  variant: 'primary' | 'secondary' | 'stroke' | 'plain'
-  size: 'large' | 'medium' | 'small' | 'extra-large'
+  variant: 'primary' | 'secondary' | 'plain'
+  size: 'large' | 'medium' | 'small'
   children: ReactNode
   disabled?: boolean
   startIcon?: React.FC<IBasicStyling>
@@ -88,6 +88,11 @@ export interface IFormInput {
 
 export interface IBaseEmailInputProps extends IFormInput {
   type: 'email'
+  endIcon?: React.FC<IBasicStyling>
+}
+
+export interface IBaseNumberInputProps extends IFormInput {
+  type: 'number'
   endIcon?: React.FC<IBasicStyling>
 }
 
@@ -141,7 +146,7 @@ export interface IRouterEvent {
 export interface IFormElementType {
   label: string
   placeholder: string
-  type: 'text' | 'textarea' | 'email'
+  type: 'text' | 'textarea' | 'email' | 'number'
   name: string
   required: boolean
 }
@@ -159,4 +164,10 @@ export interface IControlProps {
   children?: ReactNode
   required?: boolean
   helperTextClassName?: string
+}
+
+export interface IHomeFormProps {
+  title: string
+  subtitle: string
+  form: IMainFormProps
 }

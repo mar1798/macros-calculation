@@ -1,15 +1,16 @@
 import clsx from 'clsx'
 import type { ChangeEvent, FC } from 'react'
-import type {
+import {
   IBasicStyling,
   IInputModel,
   IBaseTextInputProps,
   IBaseEmailInputProps,
+  IBaseNumberInputProps,
 } from '../../types'
 import * as styles from './BaseInput.css'
 import React from 'react'
 
-type IBaseInputProps = IBaseTextInputProps | IBaseEmailInputProps
+type IBaseInputProps = IBaseTextInputProps | IBaseEmailInputProps | IBaseNumberInputProps
 
 export const BaseInput: FC<IBaseInputProps & IBasicStyling & IInputModel<string>> = ({
   className,

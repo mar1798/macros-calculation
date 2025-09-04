@@ -15,10 +15,8 @@ export const Button: React.FC<IButtonComponentProps & IBasicStyling & IButtonUni
     [styles.small]: props.size === 'small',
     [styles.medium]: props.size === 'medium',
     [styles.large]: props.size === 'large',
-    [styles.extraLarge]: props.size === 'extra-large',
     [styles.primary]: props.variant === 'primary',
     [styles.secondary]: props.variant === 'secondary',
-    [styles.stroke]: props.variant === 'stroke',
     [styles.plain]: props.variant === 'plain',
     [styles.disabled]: props.disabled,
   })

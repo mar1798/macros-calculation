@@ -2,6 +2,7 @@ import faker from './faker'
 import {
   IBaseTextInputProps,
   IControlProps,
+  IHomeFormProps,
   IImage,
   ILink,
   ILinkedLabel,
@@ -52,27 +53,47 @@ export const feedBaseInputText = (placeholder = 'Placeholder'): IBaseTextInputPr
 export const feedMainForm = (): IMainFormProps => ({
   fields: [
     {
-      name: 'name',
-      label: 'Name',
-      placeholder: 'Name',
+      name: 'product',
+      label: 'Product',
+      placeholder: 'Product',
       type: 'text',
       required: true,
     },
     {
-      name: 'email',
-      label: 'Name',
-      placeholder: 'Name',
-      type: 'email',
+      name: 'carbs',
+      label: 'Carbs',
+      placeholder: 'Carbs',
+      type: 'number',
       required: true,
     },
     {
-      name: 'company',
-      label: 'Name',
-      placeholder: 'Name',
-      type: 'textarea',
+      name: 'protein',
+      label: 'Protein',
+      placeholder: 'Protein',
+      type: 'number',
+      required: true,
+    },
+    {
+      name: 'fat',
+      label: 'Fat',
+      placeholder: 'Fat',
+      type: 'number',
+      required: false,
+    },
+    {
+      name: 'weight',
+      label: 'Weight',
+      placeholder: 'Weight',
+      type: 'number',
       required: false,
     },
   ],
-  buttonLabel: 'Send Now',
-  formName: 'home-form',
+  buttonLabel: 'Send',
+  formName: 'main-form',
+})
+
+export const feedHomeForm = (): IHomeFormProps => ({
+  title: `Macro Calculator`,
+  subtitle: 'Calculate the nutritional content of your meals',
+  form: feedMainForm(),
 })

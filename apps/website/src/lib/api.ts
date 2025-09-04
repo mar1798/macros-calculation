@@ -1,4 +1,6 @@
 import { IFormSubmitFeed } from 'widgets/types'
+import { ExtractFirstParameter, GetRequests, MapGetRequests } from '@/types/api-types'
+import { feedHomeForm } from 'widgets/feed'
 
 export interface RequestOpts {
   baseUrl: string
@@ -25,6 +27,16 @@ export class Api {
       url += `?${params.toString()}`
     }
     return url
+  }
+
+  getRequest<K extends keyof GetRequests>(
+    key: K,
+    payload: ExtractFirstParameter<GetRequests[K]>
+  ): ReturnType<GetRequests[K]> {
+    const map: MapGetRequests = {
+      getHomeFormProps: () => Promise.resolve(feedHomeForm()),
+    }
+    return map[key](payload)
   }
 
   private async request<T extends object>(

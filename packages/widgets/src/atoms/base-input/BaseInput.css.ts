@@ -87,6 +87,21 @@ export const input = style({
     color: vars.textColor,
     transition: transition('color'),
   },
+  // Remove number input arrows
+  '::-webkit-outer-spin-button': {
+    WebkitAppearance: 'none',
+    margin: 0,
+  },
+  '::-webkit-inner-spin-button': {
+    WebkitAppearance: 'none',
+    margin: 0,
+  },
+  // Firefox
+  selectors: {
+    '&[type="number"]': {
+      MozAppearance: 'textfield',
+    },
+  },
 })
 
 export const disabled = style({

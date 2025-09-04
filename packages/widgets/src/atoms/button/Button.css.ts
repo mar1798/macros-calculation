@@ -78,11 +78,6 @@ export const medium = style({
 })
 
 export const large = style({
-  padding: rem(12),
-  maxHeight: rem(44),
-})
-
-export const extraLarge = style({
   padding: rem(14),
   maxHeight: rem(48),
 })
@@ -115,20 +110,6 @@ export const secondary = style({
     [vars.borderColor]: color.neutral(0),
     [vars.childrenColor]: gradientBackground3().background,
     [vars.boxShadow]: boxShadowVar5().boxShadow,
-  },
-})
-
-export const stroke = style({
-  backgroundColor: 'transparent',
-  color: 'transparent',
-  border: border(1, color.neutral(200)),
-  vars: {
-    [vars.hoverColor]: color.neutral(100),
-    [vars.borderColor]: 'transparent',
-    [vars.childrenColor]: gradientBackground3().background,
-  },
-  ':active': {
-    border: important(border(1, color.neutral(200))),
   },
 })
 
